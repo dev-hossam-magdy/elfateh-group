@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/home"
+        android:id="@+id/navHomeFragment"
+        android:icon="@drawable/ic_home" />
+    <item
+        android:title="@string/catalog"
+        android:id="@+id/navCatalogFragment"
+        android:icon="@drawable/ic_catalog" />
+    <item
+        android:title="@string/products"
+        android:id="@+id/navProductsFragment"
+        android:icon="@drawable/ic_product" />
+
+</menu>
