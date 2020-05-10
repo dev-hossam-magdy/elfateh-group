@@ -9,6 +9,8 @@ import com.example.elfatehgroup.R
 
 
 class CatalogFragment : BaseMainFragment() {
+    override val TAG: String
+        get() = "CatalogFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,4 +21,8 @@ class CatalogFragment : BaseMainFragment() {
     }
 
 
+
+    override fun subscribeObservers() {
+       // TODO("Not yet implemented")
+    }
 }

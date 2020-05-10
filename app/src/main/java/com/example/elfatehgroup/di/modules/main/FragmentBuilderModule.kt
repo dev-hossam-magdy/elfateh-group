@@ -3,6 +3,7 @@ package com.example.elfatehgroup.di.modules.main
 import com.example.elfatehgroup.di.annotations.CatalogScope
 import com.example.elfatehgroup.di.annotations.HomeScope
 import com.example.elfatehgroup.di.annotations.ProductScope
+import com.example.elfatehgroup.di.modules.main.products.ProductsModule
 import com.example.elfatehgroup.ui.main.fragments.CatalogFragment
 import com.example.elfatehgroup.ui.main.fragments.HomeFragment
 import com.example.elfatehgroup.ui.main.fragments.ProductsFragment
@@ -18,7 +19,11 @@ abstract class FragmentBuilderModule {
     abstract fun contributeHomeFragment(): HomeFragment
 
     @ProductScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(
+        modules = [
+            ProductsModule::class
+        ]
+    )
     abstract fun contributeProductsFragment(): ProductsFragment
 
     @CatalogScope

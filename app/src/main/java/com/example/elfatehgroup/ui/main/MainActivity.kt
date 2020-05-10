@@ -1,33 +1,32 @@
 package com.example.elfatehgroup.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
+import android.widget.ProgressBar
+
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.elfatehgroup.R
 import com.example.elfatehgroup.base.BaseActivity
-import com.example.elfatehgroup.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity() {
 
+    override val progressBar: ProgressBar
+        get() = loadingProgressBar
     override val TAG: String
         get() = "MainActivity"
-    @Inject
-    lateinit var str:String
+//    @Inject
+//    lateinit var str:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding.str = str
+        setContentView(R.layout.activity_main)
         setupNavigation()
     }
 
     private fun setupNavigation() {
-        NavigationUI.setupWithNavController(binding.bottomNavView,findNavController(R.id.nav_host_fragment))
+        NavigationUI.setupWithNavController(bottom_nav_view,findNavController(R.id.nav_host_fragment))
     }
 
     override fun getRecurseId()=R.layout.activity_main
