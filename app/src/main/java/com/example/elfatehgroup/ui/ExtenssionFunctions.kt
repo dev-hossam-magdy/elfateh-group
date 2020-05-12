@@ -1,6 +1,7 @@
 package com.example.elfatehgroup.ui
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -8,8 +9,10 @@ import androidx.annotation.StringRes
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.elfatehgroup.R
 
-public fun ProgressBar.showOrHideProgressBar(isLoadind: Boolean) {
-    this.visibility = if (isLoadind)
+fun ProgressBar.showOrHideProgressBar(isLoading: Boolean) {
+
+    Log.e("ProgressBar" ,"showOrHideProgressBar: isLoading $isLoading")
+    this.visibility = if (isLoading)
         View.VISIBLE
     else
         View.GONE

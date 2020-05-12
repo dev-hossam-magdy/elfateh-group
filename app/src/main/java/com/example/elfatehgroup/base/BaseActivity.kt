@@ -1,7 +1,9 @@
 package com.example.elfatehgroup.base
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import com.example.elfatehgroup.R
 import com.example.elfatehgroup.ui.DataStateChangeListener
@@ -26,6 +28,7 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener
 
     override fun onDataStateChanged(dataState: DataState<*>) {
         GlobalScope.launch(Main) {
+            Log.e(TAG ,"onDataStateChanged: isLoading: ${dataState.isLoading}")
             progressBar.showOrHideProgressBar(dataState.isLoading)
             when(dataState){
                 is DataState.Error -> {
@@ -57,6 +60,13 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener
 
             }
 
+        }
+    }
+
+    override fun hideKeyboard() {
+        currentFocus?.let {
+            val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 

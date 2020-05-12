@@ -12,12 +12,31 @@ import com.example.elfatehgroup.util.Constants
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(productsList:List<Product>)
+    fun insertProduct(productsList: List<Product>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(productsList:Product):Long
+    fun insertProduct(productsList: Product): Long
 
-    @Query("SELECT * FROM products_table LIMIT(:pageNumber * :pageSize)")
-    fun getProductsList(pageNumber: Int, pageSize:Int = Constants.DEFULT_PRODUCT_PAGE_SIZE):LiveData<List<Product>>
+    @Query(
+        """
+        SELECT * FROM products_table
+        LIMIT(:pageNumber * :pageSize)"""
+    )
+    fun getProductsList(
+        pageNumber: Int,
+        pageSize: Int = Constants.DEFULT_PRODUCT_PAGE_SIZE
+    ): LiveData<List<Product>>
+
+
+    @Query(
+        """
+        SELECT * FROM products_table 
+        WHERE product_des LIKE '%' || :query || '%'
+        OR product_title LIKE '%' || :query || '%'
+        """
+    )
+    fun filterProducts(
+        query:String
+    ): LiveData<List<Product>>
 
 }

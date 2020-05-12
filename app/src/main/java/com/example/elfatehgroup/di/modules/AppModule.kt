@@ -39,7 +39,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRoomInstance(application: Application):AppDatabase =
+    fun provideRoomInstance(application: BaseApplication):AppDatabase =
         Room.databaseBuilder(application,AppDatabase::class.java,AppDatabase.DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
@@ -54,7 +54,7 @@ object AppModule {
             .error(R.drawable.elfateh_logo)
     @Singleton
     @Provides
-    fun provideRequestManger(application: Application,requestOptions: RequestOptions): RequestManager =
+    fun provideRequestManger(application: BaseApplication,requestOptions: RequestOptions): RequestManager =
         Glide.with(application)
             .setDefaultRequestOptions(requestOptions)
 }

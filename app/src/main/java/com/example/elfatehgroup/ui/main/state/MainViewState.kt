@@ -1,5 +1,6 @@
 package com.example.elfatehgroup.ui.main.state
 
+import android.app.DownloadManager
 import com.example.elfatehgroup.api.main.responses.Product
 
 data class MainViewState(
@@ -9,6 +10,9 @@ data class MainViewState(
 
     data class ProductsFragmentsFields(
         var productList:List<Product> =ArrayList(),
-        var pageNumber:Int = 1
+        var pageNumber:Int = 1,
+        var searchQuery: String ="",
+        var isQueryInProgress:Boolean = false,
+        var isQueryExhausted:Boolean = false
     )
 }

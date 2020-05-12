@@ -6,20 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.fragments.ProductsFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="product fragment" />
-
-    <Button
-        android:id="@+id/testEventBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fire event"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/layout_product_item"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

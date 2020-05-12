@@ -1,6 +1,7 @@
 package com.example.elfatehgroup.di.modules.main
 
 import com.example.elfatehgroup.api.main.ElfatehGroupApi
+import com.example.elfatehgroup.base.BaseApplication
 import com.example.elfatehgroup.di.annotations.MainScope
 import com.example.elfatehgroup.persistance.AppDatabase
 import com.example.elfatehgroup.persistance.dao.ProductDao
@@ -16,8 +17,8 @@ object MainModule {
 
     @MainScope
     @Provides
-    fun provideMainRepository(elfatehGroupApi: ElfatehGroupApi, productDao:ProductDao):MainRepository =
-        MainRepository(elfatehGroupApi,productDao)
+    fun provideMainRepository(elfatehGroupApi: ElfatehGroupApi, productDao:ProductDao,application: BaseApplication):MainRepository =
+        MainRepository(application,elfatehGroupApi,productDao)
 
     @MainScope
     @Provides

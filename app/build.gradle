@@ -107,5 +107,8 @@ dependencies {
     def material_dialogs_version = "3.3.0"
     implementation "com.afollestad.material-dialogs:input:$material_dialogs_version"
 
+    def circler_indicator_version ="2.1.4"
+    implementation "me.relex:circleindicator:$circler_indicator_version"
+
 
 }

@@ -4,4 +4,6 @@ import com.example.elfatehgroup.util.DataState
 
 interface DataStateChangeListener {
     fun onDataStateChanged(dataState:DataState<*>)
+    fun hideKeyboard()
 }
+

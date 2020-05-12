@@ -23,10 +23,16 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupNavigation()
+
+    }
+
+    private fun setupToolbarWithNavController() {
+//        NavigationUI.setupActionBarWithNavController(this,findNavController(R.id.nav_host_fragment))
     }
 
     private fun setupNavigation() {
         NavigationUI.setupWithNavController(bottom_nav_view,findNavController(R.id.nav_host_fragment))
+        setupToolbarWithNavController()
     }
 
     override fun getRecurseId()=R.layout.activity_main

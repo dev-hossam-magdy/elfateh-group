@@ -27,18 +27,23 @@ constructor(
         when(stateEvent){
             is MainStateEvent.GetProductsListEvent ->{
                 Log.e(TAG,"GetProductsListEvent")
-                mainRepository.fetchingProductsList(1)
+                mainRepository.fetchingProductsList(pageNumber = getPageNumber())
+            }
+            is MainStateEvent.FilterProductsEvent -> {
+               mainRepository.filterProducts(
+                   query = stateEvent.query,
+                   pageNumber = getPageNumber(),
+                   isQueryExhausted = getIsQueryExhausted()
+               )
             }
             is MainStateEvent.None -> {
                 liveData<DataState<MainViewState>> {
                     emit(value = DataState.Data(null,null))
                 }
             }
+
         }
 
-    fun fireEvent(){
-        setStateEvent(MainStateEvent.GetProductsListEvent())
-    }
 
     override fun onCleared() {
         super.onCleared()

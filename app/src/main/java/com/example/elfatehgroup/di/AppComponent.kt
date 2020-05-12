@@ -24,6 +24,6 @@ interface AppComponent : AndroidInjector<BaseApplication> {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance application: Application): AppComponent
+        fun create(@BindsInstance application: BaseApplication): AppComponent
     }
 }
