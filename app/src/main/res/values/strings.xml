@@ -14,4 +14,13 @@
     <string name="error">Error</string>
     <string name="info">Worning</string>
     <string name="search">Search</string>
+    <string name="about_us">About US</string>
+    <string name="about_us_caption">Our mission is to provide the most competitive price to our valued clientele. We attribute our success to various key features which have been followed all these years to become a name to reckon with: The key features are: Established strong relationship with various companies in Egypt and Abroad. Ensure transparent approach, quality material and best deals as per customers specifications. Our acumen in Foreign Trade, leading to our image of being a consultant rather than only Indenter. Yarns offered currently by (EL FATEH GROUP) are used in a wide range of areas including home textile products such as curtains, beddings, carpet and towels etc. and the range of products and solutions offered are gradually widened.</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_us_caption">We are always ready to help you. There are many ways to contact us. You may give us a call or send an email, choose what suits you most.</string>
+    <string name="address">10th Of Ramadan, Al Sharqya, Egypt</string>
+    <string name="phone">Tel : +2 0106 015 5033</string>
+    <string name="product_fragment_title">Products</string>
+    <string name="home_fragment_title">Home</string>
+    <string name="catalog_fragment_title">Catalog</string>
 </resources>

@@ -20,6 +20,11 @@ class CatalogFragment : BaseMainFragment() {
         return inflater.inflate(R.layout.fragment_catalog, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupToolBar(getString(R.string.catalog_fragment_title))
+
+    }
 
 
     override fun subscribeObservers() {

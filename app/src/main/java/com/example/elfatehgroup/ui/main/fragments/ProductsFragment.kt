@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
@@ -44,12 +45,14 @@ class ProductsFragment : BaseMainFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-
+        setupToolBar(getString(R.string.product_fragment_title))
         if (savedInstanceState == null)
             viewModel.loadFirstPage()
         initRecyclerView()
 
     }
+
+
 
     private fun initRecyclerView() {
         productRecyclerView.apply {

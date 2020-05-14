@@ -33,7 +33,7 @@ class HomeFragment : BaseMainFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupToolBar(getString(R.string.home_fragment_title))
         initViewPager()
 
     }

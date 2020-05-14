@@ -3,7 +3,9 @@ package com.example.elfatehgroup.ui.main.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.elfatehgroup.R
 import com.example.elfatehgroup.ViewModelProviderFactory
 import com.example.elfatehgroup.ui.DataStateChangeListener
 import com.example.elfatehgroup.ui.main.viewmodel.MainViewModel
@@ -36,5 +38,9 @@ abstract class BaseMainFragment:DaggerFragment() {
         subscribeObservers()
     }
 
+    fun setupToolBar(title:String) {
+        val toolbar = (activity as AppCompatActivity).supportActionBar
+        toolbar?.title = title
+    }
     abstract fun subscribeObservers()
 }

@@ -1,30 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.fragments.HomeFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-   <androidx.viewpager.widget.ViewPager
-       android:id="@+id/sliderViewPager"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       app:layout_constraintHeight_percent="0.35"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       />
-   <me.relex.circleindicator.CircleIndicator
-       android:id="@+id/indicator"
-       android:layout_width="match_parent"
-       android:layout_height="20dp"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager"
-       />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/sliderViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/abouts_us_container"/>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/abouts_us_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/about_us"
+            app:layout_constraintTop_toBottomOf="@+id/sliderViewPager">
+
+            <TextView
+                android:id="@+id/about_us_title_text_view"
+                style="@style/TextHeaders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/about_us"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/about_us_caption_text_view"
+                style="@style/TextCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_us_caption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/about_us_title_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/triangle_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/triangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/abouts_us_container" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contact_us_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/contact_us"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/triangle_image_view">
+
+            <TextView
+                android:id="@+id/contact_us_title_text_view"
+                style="@style/TextHeaders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/contact_us"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/contact_us_caption_text_view"
+                style="@style/TextCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_us_caption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contact_us_title_text_view" />
+
+            <TextView
+                android:id="@+id/address_text_view"
+                style="@style/TextInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_location"
+                android:text="@string/address"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contact_us_caption_text_view" />
+
+            <TextView
+                android:id="@+id/phone_text_view"
+                style="@style/TextInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_phone"
+                android:text="@string/phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_text_view" />
+
+            <TextView
+                android:id="@+id/mail_text_view"
+                style="@style/TextInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_mail"
+                android:text="Email : info@elfateh-group.com"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_text_view" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
