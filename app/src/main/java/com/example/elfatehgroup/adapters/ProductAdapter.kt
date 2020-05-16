@@ -15,7 +15,10 @@ import com.example.elfatehgroup.util.Constants
 import kotlinx.android.synthetic.main.layout_product_item.view.*
 import javax.inject.Inject
 
-class ProductAdapter @Inject constructor(private val requestManager: RequestManager):ListAdapter<Product,ProductAdapter.ProductViewHolder>(diffCallable) {
+class ProductAdapter
+@Inject constructor(
+    private val requestManager: RequestManager
+):ListAdapter<Product,ProductAdapter.ProductViewHolder>(diffCallable) {
     companion object{
         val diffCallable = object :DiffUtil.ItemCallback<Product>(){
             override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean  = oldItem.productId == newItem.productId

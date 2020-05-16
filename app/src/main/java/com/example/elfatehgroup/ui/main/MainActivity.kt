@@ -1,5 +1,6 @@
 package com.example.elfatehgroup.ui.main
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ProgressBar
 
@@ -16,8 +17,7 @@ class MainActivity : BaseActivity() {
         get() = loadingProgressBar
     override val TAG: String
         get() = "MainActivity"
-//    @Inject
-//    lateinit var str:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +28,9 @@ class MainActivity : BaseActivity() {
 
     private fun setupToolbarWithNavController() {
 //        NavigationUI.setupActionBarWithNavController(this,findNavController(R.id.nav_host_fragment))
+
+        setSupportActionBar(app_toolbar)
+
     }
 
     private fun setupNavigation() {

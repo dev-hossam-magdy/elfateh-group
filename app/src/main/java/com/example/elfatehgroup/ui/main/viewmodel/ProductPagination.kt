@@ -3,7 +3,6 @@ package com.example.elfatehgroup.ui.main.viewmodel
 import android.util.Log
 import com.example.elfatehgroup.ui.main.state.MainStateEvent
 import com.example.elfatehgroup.ui.main.state.MainViewState
-import com.google.gson.internal.LazilyParsedNumber
 
 fun MainViewModel.resetPageNumber(){
     setIsQueryExhausted(false)
@@ -19,9 +18,9 @@ fun MainViewModel.loadFirstPage(){
 }
 
 private fun MainViewModel.loadPage(pageNumber:Int){
-    Log.e("MainViewModel","""loadPage: getIsQueryExhausted:${getIsQueryExhausted()}""")
+    Log.e("MainViewModel","""loadPage: getIsQueryExhausted:${getProductIsQueryExhausted()}""")
     Log.e("MainViewModel","""loadPage: , getIsQueryInProgress: ${getIsQueryInProgress()}""")
-    if (!getIsQueryExhausted() && !getIsQueryInProgress()){
+    if (!getProductIsQueryExhausted() && !getIsQueryInProgress()){
         Log.e("MainViewModel","loadNextPage: loading next page...")
         setPageNumber(pageNumber)
         setIsQueryInProgress(true)
@@ -32,12 +31,12 @@ private fun MainViewModel.loadPage(pageNumber:Int){
 }
 
 fun MainViewModel.loadNextPage(){
-    loadPage(getPageNumber() +1)
+    loadPage(getProductPageNumber() +1)
 }
 
 fun MainViewModel.loadCurrentPage(){
     Log.e("MainViewModel" ,"loadCurrentPage")
-   loadPage(getPageNumber())
+   loadPage(getProductPageNumber())
 }
 
 

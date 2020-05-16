@@ -2,6 +2,7 @@ package com.example.elfatehgroup.api.main
 
 import androidx.lifecycle.LiveData
 import com.example.blogapplication.util.GenericApiResponse
+import com.example.elfatehgroup.api.main.responses.CatalogResponse
 import com.example.elfatehgroup.api.main.responses.ProductResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,5 +15,9 @@ interface ElfatehGroupApi {
         @Path("page") pageNumber:Int
     ):LiveData<GenericApiResponse<ProductResponse>>
 
+    @GET("catalogue/{page}")
+    fun getCatalogItemsList(
+        @Path("page") pageNumber:Int
+    ):LiveData<GenericApiResponse<CatalogResponse>>
 
 }

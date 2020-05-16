@@ -16,5 +16,4 @@ object ProductsModule {
     fun provideProductAdapter(requestManager: RequestManager): ProductAdapter =
         ProductAdapter(requestManager)
 
-
 }

@@ -4,6 +4,7 @@ import com.example.elfatehgroup.api.main.ElfatehGroupApi
 import com.example.elfatehgroup.base.BaseApplication
 import com.example.elfatehgroup.di.annotations.MainScope
 import com.example.elfatehgroup.persistance.AppDatabase
+import com.example.elfatehgroup.persistance.dao.CatalogItemDao
 import com.example.elfatehgroup.persistance.dao.ProductDao
 import com.example.elfatehgroup.repository.MainRepository
 import dagger.Module
@@ -17,8 +18,13 @@ object MainModule {
 
     @MainScope
     @Provides
-    fun provideMainRepository(elfatehGroupApi: ElfatehGroupApi, productDao:ProductDao,application: BaseApplication):MainRepository =
-        MainRepository(application,elfatehGroupApi,productDao)
+    fun provideMainRepository(
+        elfatehGroupApi: ElfatehGroupApi,
+        productDao: ProductDao,
+        application: BaseApplication,
+        catalogItemDao: CatalogItemDao
+    ): MainRepository =
+        MainRepository(application, elfatehGroupApi, productDao, catalogItemDao)
 
     @MainScope
     @Provides
@@ -29,6 +35,10 @@ object MainModule {
     @Provides
     fun provideProductsDao(appDatabase: AppDatabase): ProductDao =
         appDatabase.getProductsDao()
+
+    @Provides
+    fun provideCatalogItemDao(appDatabase: AppDatabase): CatalogItemDao =
+        appDatabase.getCatalogItemDao()
 
 
 }

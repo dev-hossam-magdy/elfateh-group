@@ -10,10 +10,13 @@ import com.example.blogapplication.repository.JobManager
 import com.example.blogapplication.util.AbsentLiveData
 import com.example.blogapplication.util.GenericApiResponse
 import com.example.elfatehgroup.api.main.ElfatehGroupApi
+import com.example.elfatehgroup.api.main.responses.CatalogItem
+import com.example.elfatehgroup.api.main.responses.CatalogResponse
 import com.example.elfatehgroup.api.main.responses.Product
 import com.example.elfatehgroup.api.main.responses.ProductResponse
 import com.example.elfatehgroup.base.BaseApplication
 import com.example.elfatehgroup.di.annotations.MainScope
+import com.example.elfatehgroup.persistance.dao.CatalogItemDao
 import com.example.elfatehgroup.persistance.dao.ProductDao
 import com.example.elfatehgroup.ui.main.state.MainViewState
 import com.example.elfatehgroup.util.Constants
@@ -26,12 +29,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+
 @MainScope
 class MainRepository
 @Inject constructor(
     private val application: BaseApplication,
     private val elfatehGroupApi: ElfatehGroupApi,
-    private val productDao: ProductDao
+    private val productDao: ProductDao,
+    private val catalogItemDao: CatalogItemDao
 ) : JobManager("MainRepository") {
 
     private val TAG = "MainRepository"
@@ -140,7 +145,6 @@ class MainRepository
                 withContext(Main) {
                     val viewState = loadCachedData()
                     result.addSource(viewState) { mainViewState ->
-                        result.removeSource(viewState)
                         onCompleteJob(
                             dataState = DataState.Data(
                                 data = mainViewState,
@@ -178,6 +182,70 @@ class MainRepository
 
             override fun setJob(job: Job) {
                 addJob("filterProducts", job)
+            }
+        }.getResultAsLiveData()
+
+    fun getCatalogList(
+        pageNumber: Int,
+        isQueryExhausted: Boolean
+    ): LiveData<DataState<MainViewState>> =
+        object : ApiResponseHandler<CatalogResponse, List<CatalogItem>, MainViewState>
+            (
+            isNetworkRequest = true,
+            shouldCanceledIfNoNetworkConnection = false,
+            shouldLoadCachedData = true,
+            isNetworkAvailable = application.isConnectedToTheInternet()
+        ) {
+            override suspend fun handelApiSuccessResponse(response: GenericApiResponse.ApiSuccessResponse<CatalogResponse>) {
+                response.body.data.let { list ->
+                    updatedLocalDataBase(list)
+                    makeCachedRequestAndReturn()
+                }
+
+            }
+
+            override suspend fun makeCachedRequestAndReturn() {
+                withContext (Main){
+                    result.addSource(loadCachedData()){ viewState ->
+                        viewState.catalogFragmentsFields.isQueryInProgress = false
+                        onCompleteJob(
+                            dataState = DataState.Data(
+                                data = viewState,
+                                response = null
+                            )
+                        )
+
+                    }
+                }
+
+            }
+
+            override fun loadCachedData(): LiveData<MainViewState> =
+                catalogItemDao.selectListOfCatalogItems(pageNumber).switchMap { list ->
+                    return@switchMap liveData <MainViewState>{
+                        emit(value = MainViewState(
+                            catalogFragmentsFields = MainViewState.CatalogFragmentsFields(
+                                catalogItemList = list,
+                                pageNumber = pageNumber,
+                                isQueryExhausted = isQueryExhausted,
+                                isQueryInProgress = false
+                            )
+                        ))
+                    }
+
+                }
+
+            override suspend fun updatedLocalDataBase(cachedObject: List<CatalogItem>?) {
+                cachedObject?.let { list ->
+                    catalogItemDao.insertListOfCatalogItems(list)
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<CatalogResponse>> =
+                elfatehGroupApi.getCatalogItemsList(pageNumber)
+
+            override fun setJob(job: Job) {
+                addJob("getCatalogList",job)
             }
         }.getResultAsLiveData()
 

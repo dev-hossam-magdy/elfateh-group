@@ -178,7 +178,6 @@ class ProductsFragment : BaseMainFragment() {
             return@setOnEditorActionListener true
         }
 
-        // handel button event
         (searchView.findViewById(R.id.search_go_btn) as View).setOnClickListener {
             val searchQuery  = searchPlate.text.toString()
             Log.e(TAG, "setOnClickListener (button event) :  Getting the search value $searchQuery")

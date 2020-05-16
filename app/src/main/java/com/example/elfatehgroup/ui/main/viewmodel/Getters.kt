@@ -1,6 +1,6 @@
 package com.example.elfatehgroup.ui.main.viewmodel
 
-fun MainViewModel.getPageNumber():Int =
+fun MainViewModel.getProductPageNumber():Int =
     getCurrentViewStateOrNew().productsFragmentsFields.pageNumber
 
 fun MainViewModel.getSearchQuery():String =
@@ -9,5 +9,5 @@ fun MainViewModel.getSearchQuery():String =
 fun MainViewModel.getIsQueryInProgress():Boolean =
     getCurrentViewStateOrNew().productsFragmentsFields.isQueryInProgress
 
-fun MainViewModel.getIsQueryExhausted():Boolean =
+fun MainViewModel.getProductIsQueryExhausted():Boolean =
     getCurrentViewStateOrNew().productsFragmentsFields.isQueryExhausted
