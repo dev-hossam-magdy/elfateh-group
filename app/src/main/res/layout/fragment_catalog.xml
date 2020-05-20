@@ -6,23 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.fragments.CatalogFragment">
 
-    <Button
-        android:id="@+id/linerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="liner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <Button
-        android:id="@+id/grideBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="gride"
-        app:layout_constraintStart_toEndOf="@+id/linerBtn"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/catalogRecyclerView"
         android:layout_width="match_parent"

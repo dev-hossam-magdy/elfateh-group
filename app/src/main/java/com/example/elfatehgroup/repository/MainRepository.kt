@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import androidx.room.Query
 import com.example.blogapplication.repository.ApiResponseHandler
 import com.example.blogapplication.repository.JobManager
 import com.example.blogapplication.util.AbsentLiveData
@@ -65,7 +64,7 @@ class MainRepository
                     result.addSource(loadCachedData()) { mainViewState ->
                         mainViewState.productsFragmentsFields.isQueryInProgress = false
                         if (mainViewState.productsFragmentsFields.productList.size <
-                            (pageNumber * Constants.DEFULT_PRODUCT_PAGE_SIZE)
+                            (pageNumber * Constants.DEFAULT_PRODUCT_PAGE_SIZE)
                         )
                             mainViewState.productsFragmentsFields.isQueryExhausted = true
                         Log.e(

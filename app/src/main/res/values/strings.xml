@@ -23,4 +23,5 @@
     <string name="product_fragment_title">Products</string>
     <string name="home_fragment_title">Home</string>
     <string name="catalog_fragment_title">Catalog</string>
+    <string name="retry">Retry</string>
 </resources>

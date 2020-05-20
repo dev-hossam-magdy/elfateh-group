@@ -1,20 +1,16 @@
 package com.example.elfatehgroup.ui.main
 
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.ProgressBar
-
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.elfatehgroup.R
 import com.example.elfatehgroup.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    override val progressBar: ProgressBar
-        get() = loadingProgressBar
+
     override val TAG: String
         get() = "MainActivity"
 
@@ -34,9 +30,20 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupNavigation() {
-        NavigationUI.setupWithNavController(bottom_nav_view,findNavController(R.id.nav_host_fragment))
+        NavigationUI.setupWithNavController(
+            bottom_nav_view,
+            findNavController(R.id.nav_host_fragment)
+        )
         setupToolbarWithNavController()
     }
 
-    override fun getRecurseId()=R.layout.activity_main
+    override fun getRecurseId() = R.layout.activity_main
+
+    override fun showOrHideProgressBar(isLoading: Boolean) {
+        loadingProgressBar.visibility =
+            if (isLoading)
+                View.VISIBLE
+            else
+                View.GONE
+    }
 }

@@ -25,6 +25,7 @@
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="10dp"
+            android:background="@color/colorFooter"
             app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

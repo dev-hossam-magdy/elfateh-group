@@ -18,9 +18,8 @@ import kotlinx.coroutines.launch
 
 abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener {
     abstract protected val TAG: String
-    abstract protected val progressBar:ProgressBar
 
-//    protected lateinit var binding: BindingClass
+    //    protected lateinit var binding: BindingClass
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        binding = DataBindingUtil.setContentView(this , getRecurseId())
@@ -28,13 +27,13 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener
 
     override fun onDataStateChanged(dataState: DataState<*>) {
         GlobalScope.launch(Main) {
-            Log.e(TAG ,"onDataStateChanged: isLoading: ${dataState.isLoading}")
-            progressBar.showOrHideProgressBar(dataState.isLoading)
-            when(dataState){
+            Log.e(TAG, "onDataStateChanged: isLoading: ${dataState.isLoading}")
+            showOrHideProgressBar(dataState.isLoading)
+            when (dataState) {
                 is DataState.Error -> {
                     handelState(dataState.response, R.string.error)
                 }
-                is DataState.Data ->{
+                is DataState.Data -> {
                     handelState(dataState.response, R.string.info)
 
                 }
@@ -45,17 +44,17 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener
 
     private fun handelState(response: Event<Response>?, resourceId: Int) {
         response?.let { event ->
-            event.getContentIfNotHandled()?.let {res ->
-                Log.e(TAG,"handelStateError: there is an error ${res.message}")
+            event.getContentIfNotHandled()?.let { res ->
+                Log.e(TAG, "handelStateError: there is an error ${res.message}")
                 val msg = res.message?.let {
                     it
-                }?:Constants.ERROR_UNKNOWN
-                when(res.responseType){
-                    is ResponseType.Dialog -> this.displayDialogMessage(resourceId,msg)
+                } ?: Constants.ERROR_UNKNOWN
+                when (res.responseType) {
+                    is ResponseType.Dialog -> this.displayDialogMessage(resourceId, msg)
 
                     is ResponseType.Toast -> this.displayToastMessage(msg)
 
-                    is ResponseType.None -> Log.e(TAG ,"handelStateError: ResponseType.None: $msg")
+                    is ResponseType.None -> Log.e(TAG, "handelStateError: ResponseType.None: $msg")
                 }
 
             }
@@ -71,4 +70,6 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener
     }
 
     abstract fun getRecurseId(): Int
+
+    abstract fun showOrHideProgressBar(isLoading: Boolean)
 }

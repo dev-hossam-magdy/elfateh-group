@@ -41,6 +41,7 @@ class CatalogItemAdapter @Inject constructor(private val requestManager: Request
             requestManager
                 .load(Constants.BASE_IMAGE_URL + catalogItem.imageName)
                 .into(holder.catalogItemImageView)
+
             holder.catalogItemNumberTextView.text = catalogItem.yarnName
 
         }

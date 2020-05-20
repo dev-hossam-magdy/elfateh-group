@@ -26,7 +26,7 @@ interface CatalogItemDao {
     )
     fun selectListOfCatalogItems(
         pageNumber: Int,
-        defaultPageSize: Int = Constants.DEFULT_CATAOG_ITEM_PAGE_SIZE
+        defaultPageSize: Int = Constants.DEFAULT_CATALOG_ITEM_PAGE_SIZE
     ): LiveData<List<CatalogItem>>
 
 

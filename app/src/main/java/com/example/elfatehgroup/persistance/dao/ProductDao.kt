@@ -24,7 +24,7 @@ interface ProductDao {
     )
     fun getProductsList(
         pageNumber: Int,
-        pageSize: Int = Constants.DEFULT_PRODUCT_PAGE_SIZE
+        pageSize: Int = Constants.DEFAULT_PRODUCT_PAGE_SIZE
     ): LiveData<List<Product>>
 
 

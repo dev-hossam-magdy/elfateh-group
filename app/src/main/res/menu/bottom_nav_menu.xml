@@ -5,14 +5,18 @@
     <item
         android:title="@string/home"
         android:id="@+id/navHomeFragment"
-        android:icon="@drawable/ic_home" />
+        android:icon="@drawable/ic_home_new_color"
+        app:showAsAction="ifRoom"
+        />
     <item
         android:title="@string/catalog"
         android:id="@+id/navCatalogFragment"
-        android:icon="@drawable/ic_catalog" />
+        android:icon="@drawable/ic_catalog_new_color"
+        app:showAsAction="ifRoom"/>
     <item
         android:title="@string/products"
         android:id="@+id/navProductsFragment"
-        android:icon="@drawable/ic_product" />
+        android:icon="@drawable/ic_product_new_color"
+        app:showAsAction="ifRoom"/>
 
 </menu>

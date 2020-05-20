@@ -7,9 +7,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +18,8 @@ import com.example.elfatehgroup.ui.main.state.MainViewState
 import com.example.elfatehgroup.ui.main.viewmodel.*
 import com.example.elfatehgroup.util.Constants
 import com.example.elfatehgroup.util.DataState
-import com.example.elfatehgroup.util.TopSpacingItemDecoration
+import com.example.elfatehgroup.util.CatalogItemDecoration
+import com.example.elfatehgroup.util.ProductItemDecoration
 import kotlinx.android.synthetic.main.fragment_products.*
 import javax.inject.Inject
 
@@ -59,7 +58,7 @@ class ProductsFragment : BaseMainFragment() {
             adapter = productAdapter
             layoutManager = LinearLayoutManager(this@ProductsFragment.context)
 
-            val itemDecoration = TopSpacingItemDecoration(30)
+            val itemDecoration = ProductItemDecoration(30)
             removeItemDecoration(itemDecoration)
             addItemDecoration(itemDecoration)
 

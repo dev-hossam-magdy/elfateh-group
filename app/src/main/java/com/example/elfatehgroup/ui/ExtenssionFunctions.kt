@@ -11,20 +11,31 @@ import com.example.elfatehgroup.R
 
 fun ProgressBar.showOrHideProgressBar(isLoading: Boolean) {
 
-    Log.e("ProgressBar" ,"showOrHideProgressBar: isLoading $isLoading")
-    this.visibility = if (isLoading)
-        View.VISIBLE
-    else
-        View.GONE
+    Log.e("ProgressBar", "showOrHideProgressBar: isLoading $isLoading")
+    this.visibility =
+        if (isLoading)
+            View.VISIBLE
+        else
+            View.GONE
 }
 
 
-fun Activity.displayDialogMessage(@StringRes titleResurse: Int, msg: String) {
+fun Activity.displayDialogMessage(@StringRes titleRecurse: Int, msg: String) {
     MaterialDialog(this)
         .show {
-            title(titleResurse)
+            title(titleRecurse)
             message(text = msg)
             positiveButton(R.string.text_ok)
+        }
+
+}
+
+fun Activity.displayCheckNetWorkDialogMessage(@StringRes titleRecurse: Int, msg: String) {
+    MaterialDialog(this)
+        .show {
+            title(titleRecurse)
+            message(text = msg)
+            positiveButton(R.string.retry)
         }
 
 }
