@@ -17,7 +17,7 @@ fun MainViewModel.setCatalogsList(newCatalogList:List<CatalogItem>){
 }
 
 
-fun MainViewModel.setPageNumber(pageNumber: Int){
+fun MainViewModel.setProductPageNumber(pageNumber: Int){
     val update = getCurrentViewStateOrNew()
     if (update.productsFragmentsFields.pageNumber == pageNumber)
         return
@@ -25,7 +25,15 @@ fun MainViewModel.setPageNumber(pageNumber: Int){
     setViewState(update)
 }
 
-fun MainViewModel.setSearchQuery(query: String){
+fun MainViewModel.setCatalogPageNumber(pageNumber: Int){
+    val update = getCurrentViewStateOrNew()
+    if (update.catalogFragmentsFields.pageNumber == pageNumber)
+        return
+    update.catalogFragmentsFields.pageNumber = pageNumber
+    setViewState(update)
+}
+
+fun MainViewModel.setProductSearchQuery(query: String){
     val update = getCurrentViewStateOrNew()
     if (update.productsFragmentsFields.searchQuery.equals(query))
         return
@@ -33,8 +41,16 @@ fun MainViewModel.setSearchQuery(query: String){
     setViewState(update)
 }
 
+fun MainViewModel.setCatalogSearchQuery(query: String){
+    val update = getCurrentViewStateOrNew()
+    if (update.catalogFragmentsFields.searchQuery.equals(query))
+        return
+    update.catalogFragmentsFields.searchQuery = query
+    setViewState(update)
+}
 
-fun MainViewModel.setIsQueryInProgress(isQueryInProgress: Boolean){
+
+fun MainViewModel.setProductIsQueryInProgress(isQueryInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     if (update.productsFragmentsFields.isQueryInProgress == isQueryInProgress)
         return
@@ -42,12 +58,27 @@ fun MainViewModel.setIsQueryInProgress(isQueryInProgress: Boolean){
     setViewState(update)
 }
 
+fun MainViewModel.setCatalogIsQueryInProgress(isQueryInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    if (update.catalogFragmentsFields.isQueryInProgress == isQueryInProgress)
+        return
+    update.catalogFragmentsFields.isQueryInProgress = isQueryInProgress
+    setViewState(update)
+}
 
 
-fun MainViewModel.setIsQueryExhausted(isQueryExhausted: Boolean){
+fun MainViewModel.setProductIsQueryExhausted(isQueryExhausted: Boolean){
     val update = getCurrentViewStateOrNew()
     if (update.productsFragmentsFields.isQueryExhausted == isQueryExhausted)
         return
     update.productsFragmentsFields.isQueryExhausted = isQueryExhausted
+    setViewState(update)
+}
+
+fun MainViewModel.setCatalogIsQueryExhausted(isQueryExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    if (update.catalogFragmentsFields.isQueryExhausted == isQueryExhausted)
+        return
+    update.catalogFragmentsFields.isQueryExhausted = isQueryExhausted
     setViewState(update)
 }

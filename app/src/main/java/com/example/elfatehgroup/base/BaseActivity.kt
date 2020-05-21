@@ -19,10 +19,8 @@ import kotlinx.coroutines.launch
 abstract class BaseActivity : DaggerAppCompatActivity(), DataStateChangeListener {
     abstract protected val TAG: String
 
-    //    protected lateinit var binding: BindingClass
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = DataBindingUtil.setContentView(this , getRecurseId())
     }
 
     override fun onDataStateChanged(dataState: DataState<*>) {

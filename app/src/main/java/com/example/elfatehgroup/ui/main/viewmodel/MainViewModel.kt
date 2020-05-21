@@ -3,6 +3,7 @@ package com.example.elfatehgroup.ui.main.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.example.blogapplication.util.AbsentLiveData
 import com.example.elfatehgroup.repository.MainRepository
 import com.example.elfatehgroup.ui.BaseViewModel
 import com.example.elfatehgroup.ui.main.state.MainStateEvent
@@ -34,9 +35,13 @@ constructor(
                 )
             }
             is MainStateEvent.GetCatalogListEvent -> {
-                mainRepository.getCatalogList(
-                    pageNumber = 1,
-                    isQueryExhausted = false
+                mainRepository.getCatalogList(pageNumber = getCatalogPageNumber())
+            }
+            is MainStateEvent.FilterCatalogEvent -> {
+                mainRepository.filterCatalogList(
+                    query = stateEvent.query,
+                    pageNumber = getCatalogPageNumber(),
+                    isQueryExhausted = getCatalogIsQueryExhausted()
                 )
             }
             is MainStateEvent.None -> {

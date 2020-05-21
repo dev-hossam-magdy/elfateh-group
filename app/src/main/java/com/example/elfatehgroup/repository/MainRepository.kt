@@ -185,8 +185,7 @@ class MainRepository
         }.getResultAsLiveData()
 
     fun getCatalogList(
-        pageNumber: Int,
-        isQueryExhausted: Boolean
+        pageNumber: Int
     ): LiveData<DataState<MainViewState>> =
         object : ApiResponseHandler<CatalogResponse, List<CatalogItem>, MainViewState>
             (
@@ -204,9 +203,19 @@ class MainRepository
             }
 
             override suspend fun makeCachedRequestAndReturn() {
-                withContext (Main){
-                    result.addSource(loadCachedData()){ viewState ->
+                withContext(Main) {
+                    result.addSource(loadCachedData()) { viewState ->
                         viewState.catalogFragmentsFields.isQueryInProgress = false
+                        if (viewState.catalogFragmentsFields.catalogItemList.size <
+                            (viewState.catalogFragmentsFields.pageNumber * Constants.DEFAULT_CATALOG_ITEM_PAGE_SIZE)
+                        )
+                            viewState.catalogFragmentsFields.isQueryExhausted = true
+                        Log.e(
+                            TAG, """makeCachedRequestAndReturn: page number $pageNumber ,
+                            | isQueryInProgress:${viewState.catalogFragmentsFields.isQueryInProgress} ,
+                            | isQueryExhausted: ${viewState.catalogFragmentsFields.isQueryExhausted}""".trimMargin()
+                        )
+
                         onCompleteJob(
                             dataState = DataState.Data(
                                 data = viewState,
@@ -221,15 +230,16 @@ class MainRepository
 
             override fun loadCachedData(): LiveData<MainViewState> =
                 catalogItemDao.selectListOfCatalogItems(pageNumber).switchMap { list ->
-                    return@switchMap liveData <MainViewState>{
-                        emit(value = MainViewState(
-                            catalogFragmentsFields = MainViewState.CatalogFragmentsFields(
-                                catalogItemList = list,
-                                pageNumber = pageNumber,
-                                isQueryExhausted = isQueryExhausted,
-                                isQueryInProgress = false
+                    return@switchMap liveData<MainViewState> {
+                        emit(
+                            value = MainViewState(
+                                catalogFragmentsFields = MainViewState.CatalogFragmentsFields(
+                                    catalogItemList = list,
+                                    pageNumber = pageNumber,
+                                    isQueryInProgress = false
+                                )
                             )
-                        ))
+                        )
                     }
 
                 }
@@ -244,7 +254,70 @@ class MainRepository
                 elfatehGroupApi.getCatalogItemsList(pageNumber)
 
             override fun setJob(job: Job) {
-                addJob("getCatalogList",job)
+                addJob("getCatalogList", job)
+            }
+        }.getResultAsLiveData()
+
+
+    fun filterCatalogList(
+        query: String,
+        pageNumber: Int,
+        isQueryExhausted: Boolean
+    ): LiveData<DataState<MainViewState>> =
+        object : ApiResponseHandler<Void, List<CatalogItem>, MainViewState>(
+            isNetworkAvailable = application.isConnectedToTheInternet(),
+            shouldLoadCachedData = true,
+            shouldCanceledIfNoNetworkConnection = false,
+            isNetworkRequest = false
+        ) {
+            // not needed in this case
+            override suspend fun handelApiSuccessResponse(response: GenericApiResponse.ApiSuccessResponse<Void>) {
+
+            }
+
+            override suspend fun makeCachedRequestAndReturn() {
+                withContext(Main) {
+                    result.addSource(loadCachedData()) { mainViewState ->
+                        onCompleteJob(
+                            dataState = DataState.Data(
+                                data = mainViewState,
+                                response = null
+                            )
+                        )
+
+                    }
+                }
+
+            }
+
+            override fun loadCachedData(): LiveData<MainViewState> =
+                catalogItemDao.filterCatalogItems(query).switchMap { list ->
+                    return@switchMap liveData<MainViewState> {
+                        emit(
+                            value = MainViewState(
+                                catalogFragmentsFields = MainViewState.CatalogFragmentsFields(
+                                    catalogItemList = list,
+                                    pageNumber = pageNumber,
+                                    isQueryExhausted = isQueryExhausted,
+                                    isQueryInProgress = false
+                                )
+                            )
+                        )
+                    }
+                }
+
+
+            // not needed in this case
+            override suspend fun updatedLocalDataBase(cachedObject: List<CatalogItem>?) {
+
+            }
+
+            // not needed in this case
+            override fun createCall(): LiveData<GenericApiResponse<Void>> =
+                AbsentLiveData.create()
+
+            override fun setJob(job: Job) {
+                addJob("filterCatalogList", job)
             }
         }.getResultAsLiveData()
 

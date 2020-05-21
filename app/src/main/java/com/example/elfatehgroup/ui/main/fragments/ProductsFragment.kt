@@ -18,7 +18,6 @@ import com.example.elfatehgroup.ui.main.state.MainViewState
 import com.example.elfatehgroup.ui.main.viewmodel.*
 import com.example.elfatehgroup.util.Constants
 import com.example.elfatehgroup.util.DataState
-import com.example.elfatehgroup.util.CatalogItemDecoration
 import com.example.elfatehgroup.util.ProductItemDecoration
 import kotlinx.android.synthetic.main.fragment_products.*
 import javax.inject.Inject
@@ -46,7 +45,7 @@ class ProductsFragment : BaseMainFragment() {
         setHasOptionsMenu(true)
         setupToolBar(getString(R.string.product_fragment_title))
         if (savedInstanceState == null)
-            viewModel.loadFirstPage()
+            viewModel.loadProductFirstPage()
         initRecyclerView()
 
     }
@@ -69,7 +68,7 @@ class ProductsFragment : BaseMainFragment() {
                     val lastPassion = layoutManager.findLastVisibleItemPosition()
                     if (lastPassion == recyclerView.adapter?.itemCount?.minus(1)) {
                         Log.e(TAG, "addOnScrollListener: load the next page")
-                        viewModel.loadNextPage()
+                        viewModel.loadProductNextPage()
                     }
                 }
             })
@@ -123,7 +122,7 @@ class ProductsFragment : BaseMainFragment() {
             event.peekContent().message?.let {
                 if (it.equals(Constants.SERVER_PAGINATION_ERROR)) {
                     event.getContentIfNotHandled()
-                    viewModel.setIsQueryExhausted(true)
+                    viewModel.setProductIsQueryExhausted(true)
                 }
 
             }
@@ -136,10 +135,6 @@ class ProductsFragment : BaseMainFragment() {
         inflater.inflate(R.menu.search_menu,menu)
         setupSearchView(menu)
 
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
     }
 
 
@@ -156,7 +151,7 @@ class ProductsFragment : BaseMainFragment() {
             searchView.setOnCloseListener {
                 Log.e(TAG,"setupSearchView: setOnCloseListener:")
 
-                viewModel.loadCurrentPage()
+                viewModel.loadProductCurrentPage()
                 searchView.onActionViewCollapsed()
                 dataStateChangeListener.hideKeyboard()
                 true

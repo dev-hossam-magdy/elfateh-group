@@ -11,7 +11,7 @@
         android:id="@+id/logo_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/elfateh_logo"
+        android:src="@drawable/logo"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="parent"
